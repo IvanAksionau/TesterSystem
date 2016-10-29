@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TesterSystem:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TesterSystem_jar</output-path>
+    <root id="archive" name="TesterSystem.jar">
+      <element id="module-output" name="TesterSystem" />
+      <element id="extracted-dir" path="D:/автоматизация/тренинг/libraries/mysql-connector-java-5.1.21.jar" path-in-jar="/" />
+      <element id="library" level="project" name="mysql-connector-java-5.1.21" />
+    </root>
+  </artifact>
+</component>
