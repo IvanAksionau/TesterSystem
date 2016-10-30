@@ -76,10 +76,10 @@ public class View {
 
     static void checkPermissions(int userId) {
         if (userId == 1) {
-            AdminMenu.getMenu(controller);
+            AdminMenu.getMenu();
         }
         if (userId > 1) {
-            UserMenu.getMenu(controller);
+            UserMenu.getMenu();
         }
     }
 }

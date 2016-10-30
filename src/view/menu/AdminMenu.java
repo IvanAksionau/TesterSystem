@@ -17,12 +17,12 @@ import java.util.Scanner;
  */
 public class AdminMenu {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final Controller controller = new Controller();
     private static String adminMenu = "Enter :" + "\n"
             + "1 - Add new test" + "\n"
             + "2 - Show all tests";
 
-    public static void getMenu(Controller controller) {
-
+    public static void getMenu() {
         while (true) {
             System.out.println("Enter \"menu\" in order to get the CommandMenu, or \"logout\" to logout");
             String Command = scanner.nextLine();
@@ -35,27 +35,30 @@ public class AdminMenu {
                     System.out.println(adminMenu);
                     break;
                 case "1"://AddNewTest
-                    AddNewTestRequest request2 = new AddNewTestRequest();
-                    request2.setCommandName("ADD_NEW_TEST");
-                    System.out.println("Enter test name :");
-                    request2.setTestName(getNotEmptyData());
-                    System.out.println("Enter subject type of test :");
-                    request2.setSubjectType(getNotEmptyData());
-                    //используем метод формирующий список вопросов
-                    ArrayList<Question> questionList = setTestQuestions();
-                    request2.setQuestions(questionList);
-                    Response response2 = controller.doRequest(request2);
-                    if (response2.isErrorStatus() == false) {
-                        System.out.println(response2.getResultMessage());
-                    } else {
-                        System.out.println(response2.getErrorMessage());
-                    }
+                    AddTest();
                     break;
                 case "2"://Show all tests
                     showTestList(controller);
                     break;
             }
+        }
+    }
 
+    public static void AddTest(){
+        AddNewTestRequest request2 = new AddNewTestRequest();
+        request2.setCommandName("ADD_NEW_TEST");
+        System.out.println("Enter test name :");
+        request2.setTestName(getNotEmptyData());
+        System.out.println("Enter subject type of test :");
+        request2.setSubjectType(getNotEmptyData());
+        //используем метод формирующий список вопросов
+        ArrayList<Question> questionList = setTestQuestions();
+        request2.setQuestions(questionList);
+        Response response2 = controller.doRequest(request2);
+        if (response2.isErrorStatus() == false) {
+            System.out.println(response2.getResultMessage());
+        } else {
+            System.out.println(response2.getErrorMessage());
         }
     }
 
@@ -75,10 +78,12 @@ public class AdminMenu {
                 System.out.println("Enter correct answer :");
                 String correctAnswer = getNotEmptyData();
                 question.setCorrectAnswer(correctAnswer);
-                System.out.println("Enter 2 incorrect answers :");
+                System.out.println("Enter first incorrect answers :");
                 answerVariants.add(getNotEmptyData());
+                System.out.println("Enter second incorrect answers :");
                 answerVariants.add(getNotEmptyData());
                 answerVariants.add(correctAnswer);
+
                 //перемешиваем варианты ответов в колекции,
                 //чтобы менять расположение correctAnswer
                 Collections.shuffle(answerVariants);

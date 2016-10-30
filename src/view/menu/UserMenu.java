@@ -18,12 +18,13 @@ import static jdk.nashorn.internal.runtime.JSType.isString;
  * Created by Ivan on 26.10.2016.
  */
 public class UserMenu {
+    private static final Controller controller = new Controller();
     private static final Scanner scanner = new Scanner(System.in);
     private static String userMenu = "Enter :" + "\n"
             + "1 - Pass test" + "\n"
             + "2 - Show all tests";
 
-    public static void getMenu(Controller controller) {
+    public static void getMenu() {
         while (true) {
             System.out.println("Enter \"menu\" in order to get the CommandMenu, or \"logout\" to logout");
             String Command = scanner.nextLine();
