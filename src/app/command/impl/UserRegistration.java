@@ -33,7 +33,7 @@ public class UserRegistration implements Command {
         try {
             resultId = nbService.registration(login, password);
         } catch (ServiceException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(e);
         }
 
         UserRegistrationResponse response = new UserRegistrationResponse();

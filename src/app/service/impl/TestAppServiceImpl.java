@@ -22,7 +22,7 @@ public class TestAppServiceImpl implements TestAppService {
         try {
             TestDAOFactory.getInstance().getTestDAO().addNewTest(testName, subjectType, questions);
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
 
     }
@@ -36,7 +36,7 @@ public class TestAppServiceImpl implements TestAppService {
         try {
             test = TestDAOFactory.getInstance().getTestDAO().passTest(testId);
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return test;
     }
@@ -48,7 +48,7 @@ public class TestAppServiceImpl implements TestAppService {
         try {
             result = TestDAOFactory.getInstance().getTestDAO().showAllTests();
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return result;
     }
@@ -62,7 +62,7 @@ public class TestAppServiceImpl implements TestAppService {
         try {
             result = UserDAOFactory.getInstance().getUserDAO().registration(login, password);
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return result;
     }
@@ -76,7 +76,7 @@ public class TestAppServiceImpl implements TestAppService {
         try {
             result = UserDAOFactory.getInstance().getUserDAO().logging(login, password);
         } catch (DAOException e) {
-            throw new ServiceException(e.getMessage());
+            throw new ServiceException(e);
         }
         return result;
     }

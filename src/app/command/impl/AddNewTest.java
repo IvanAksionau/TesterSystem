@@ -33,7 +33,7 @@ public class AddNewTest implements Command {
         try {
             appService.addNewTest(testName, subjectType, questions);
         } catch (ServiceException e) {
-            throw new CommandException();
+            throw new CommandException(e);
         }
 
         Response response = new Response();

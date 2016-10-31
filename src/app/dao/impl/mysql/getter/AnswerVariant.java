@@ -30,14 +30,14 @@ public class AnswerVariant {
             }
 
         } catch (InterruptedException | SQLException ex) {
-            throw new DAOException(ex.getMessage());
+            throw new DAOException(ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                     ConnectionPool.getInstance().returnConnection(connection);
                 } catch (InterruptedException | SQLException ex) {
-                    throw new DAOException(ex.getMessage());
+                    throw new DAOException(ex);
                 }
             }
         }

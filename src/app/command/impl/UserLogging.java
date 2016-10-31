@@ -33,7 +33,7 @@ public class UserLogging implements Command {
         try {
             resultId = appService.logging(login,password);
         } catch (ServiceException e) {
-            throw new CommandException(e.getMessage());
+            throw new CommandException(e);
         }
 
         UserLoggingResponse response = new UserLoggingResponse();

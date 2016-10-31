@@ -48,14 +48,14 @@ public class MySQLTestDAO implements TestDAO {
                 }
             }
         } catch (InterruptedException | SQLException ex) {
-            throw new DAOException(ex.getMessage());
+            throw new DAOException(ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                     ConnectionPool.getInstance().returnConnection(connection);
                 } catch (InterruptedException | SQLException ex) {
-                    throw new DAOException(ex.getMessage());
+                    throw new DAOException(ex);
                 }
             }
         }
@@ -98,14 +98,14 @@ public class MySQLTestDAO implements TestDAO {
             test.setQuestions(questions);
             return test;
         } catch (InterruptedException | SQLException ex) {
-            throw new DAOException(ex.getMessage());
+            throw new DAOException(ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                     ConnectionPool.getInstance().returnConnection(connection);
                 } catch (InterruptedException | SQLException ex) {
-                    throw new DAOException(ex.getMessage());
+                    throw new DAOException(ex);
                 }
             }
         }
@@ -132,14 +132,14 @@ public class MySQLTestDAO implements TestDAO {
             }
 
         } catch (InterruptedException | SQLException ex) {
-            throw new DAOException(ex.getMessage());
+            throw new DAOException(ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                     ConnectionPool.getInstance().returnConnection(connection);
                 } catch (InterruptedException | SQLException ex) {
-                    throw new DAOException(ex.getMessage());
+                    throw new DAOException(ex);
                 }
             }
         }

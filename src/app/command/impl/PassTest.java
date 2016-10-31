@@ -32,7 +32,7 @@ public class PassTest implements Command {
         try {
             test = appService.passTest(testId);
         } catch (ServiceException e) {
-            throw new CommandException();
+            throw new CommandException(e);
         }
 
         PassTestResponse response = new PassTestResponse();

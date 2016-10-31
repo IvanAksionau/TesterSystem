@@ -41,6 +41,7 @@ public class XMLTestsData {
         for (StudentTest test :tests){
             if (testID == test.getTestId()){
                 getedTest = test;
+                return getedTest;
             }
         }
         return getedTest;

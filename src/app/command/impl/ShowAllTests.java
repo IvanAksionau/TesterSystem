@@ -34,7 +34,7 @@ public class ShowAllTests implements Command {
         try {
             tests = appService.showAllTests();
         } catch (ServiceException e) {
-            throw new CommandException();
+            throw new CommandException(e);
         }
 
         ShowAllTestResponse response = new ShowAllTestResponse();
