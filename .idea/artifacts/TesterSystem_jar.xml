@@ -4,7 +4,7 @@
     <root id="archive" name="TesterSystem.jar">
       <element id="module-output" name="TesterSystem" />
       <element id="extracted-dir" path="D:/автоматизация/тренинг/libraries/mysql-connector-java-5.1.21.jar" path-in-jar="/" />
-      <element id="library" level="project" name="mysql-connector-java-5.1.21" />
+      <element id="library" level="project" name="additional librarie" />
     </root>
   </artifact>
 </component>

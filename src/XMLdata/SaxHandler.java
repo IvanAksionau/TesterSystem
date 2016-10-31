@@ -1,7 +1,7 @@
 package XMLdata;
 
-import bean.entity.Question;
-import bean.entity.Test;
+import app.bean.entity.Question;
+import app.bean.entity.StudentTest;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class SaxHandler extends DefaultHandler {
     private String elementName;
-    private Test test;
-    private ArrayList<Test> testList = new ArrayList<>();
+    private StudentTest test;
+    private ArrayList<StudentTest> testList = new ArrayList<>();
     private Question question;
     private ArrayList<Question> questionList;
     private ArrayList<String> variants;
@@ -35,7 +35,7 @@ public class SaxHandler extends DefaultHandler {
         elementName = qName;
         switch (elementName) {
             case "Test":
-                test = new Test();
+                test = new StudentTest();
                 test.setTestId(Integer.parseInt(attr.getValue(0)));
                 questionList = new ArrayList<>();
                 break;
@@ -62,12 +62,14 @@ public class SaxHandler extends DefaultHandler {
                 question.setVariants(variants);
                 break;
         }
+        elementName = "";
     }
 
     @Override
     public void characters(char[] ch, int start, int end) {
         switch (elementName) {
             case "testName":
+                String n = new String(ch, start, end);
                 test.setTestName(new String(ch, start, end));
                 break;
             case "subject":
@@ -85,7 +87,7 @@ public class SaxHandler extends DefaultHandler {
         }
     }
 
-    public ArrayList<Test> getTestList() {
+    public ArrayList<StudentTest> getTestList() {
         return testList;
     }
 
