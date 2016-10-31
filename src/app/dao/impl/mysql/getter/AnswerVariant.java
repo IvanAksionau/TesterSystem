@@ -35,10 +35,14 @@ public class AnswerVariant {
             if (statement != null) {
                 try {
                     statement.close();
-                    ConnectionPool.getInstance().returnConnection(connection);
-                } catch (InterruptedException | SQLException ex) {
+                } catch (SQLException ex) {
                     throw new DAOException(ex);
                 }
+            }
+            try {
+                ConnectionPool.getInstance().returnConnection(connection);
+            } catch (SQLException | InterruptedException e) {
+                throw new DAOException(e);
             }
         }
         return variants;

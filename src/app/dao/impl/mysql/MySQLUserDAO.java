@@ -31,10 +31,16 @@ public class MySQLUserDAO implements UserDAO {
             if (statement != null) {
                 try {
                     statement.close();
-                    ConnectionPool.getInstance().returnConnection(connection);
-                } catch (InterruptedException | SQLException ex) {
+                } catch ( SQLException ex) {
                     throw new DAOException(ex);
                 }
+            }//returnConnection выполняем в отдельном блоке
+            //если условие (statement != null) не выполниттся
+            //Connection не вернётся обратно в пул
+            try {
+                ConnectionPool.getInstance().returnConnection(connection);
+            } catch (SQLException | InterruptedException e) {
+                throw new DAOException(e);
             }
         }
 
@@ -57,16 +63,21 @@ public class MySQLUserDAO implements UserDAO {
                 return false;
             }
         } catch (InterruptedException | SQLException ex) {
-            throw new DAOException(ex.getMessage());
+            throw new DAOException(ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
-                    ConnectionPool.getInstance().returnConnection(connection);
-                } catch (InterruptedException | SQLException ex) {
-                    throw new DAOException(ex.getMessage());
+                } catch (SQLException ex) {
+                    throw new DAOException(ex);
                 }
             }
+            try {
+                ConnectionPool.getInstance().returnConnection(connection);
+            } catch (SQLException | InterruptedException e) {
+                throw new DAOException(e);
+            }
+
         }
 
     }
