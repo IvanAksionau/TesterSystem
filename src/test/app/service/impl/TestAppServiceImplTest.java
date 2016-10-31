@@ -10,7 +10,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 
-
 /**
  * Created by Ivan on 31.10.2016.
  */
@@ -31,13 +30,22 @@ public class TestAppServiceImplTest {
     @Test
     public void showAllTests() throws Exception {
         appTests = appData.showAllTests();
-        Assert.assertArrayEquals(XMLTests.toArray(),appTests.toArray());
+        Assert.assertArrayEquals(XMLTests.toArray(), appTests.toArray());
     }
+
     @Test
     public void passTest() throws Exception {
         StudentTest testApp = appData.passTest(1);
         StudentTest testXml = XMLData.getTest(1);
-        Assert.assertEquals(testXml,testApp);
+        Assert.assertEquals(testXml, testApp);
+    }
+
+    @Test
+    public void logging() throws Exception {
+        boolean result = appData.registration("admin", "admin");
+        Assert.assertEquals("логин уже существует", false, result);
+        result = appData.registration("newLogin", "newPassword");
+        Assert.assertEquals("регистрация успешна", true, result);
     }
 
 }
