@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="www.epam.tester.xml.com"
+        xmlns:tNum="www.epam.tester.xml.com"
+        elementFormDefault="qualified">
+
+    <element name="testData">
+        <complexType>
+            <sequence>
+                <element name="Test" type="tNum:Test"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="variants">
+        <sequence>
+            <element name="variant" type="string" minOccurs="3" maxOccurs="3"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Question">
+        <sequence>
+            <element name="description" type="string"/>
+            <element name="correctAnswer" type="string"/>
+            <element name="variants" type="tNum:variants"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Test">
+        <sequence>
+            <element name="testName" type="string"/>
+            <element name="subject" type="string"/>
+            <element name="question" type="tNum:Question" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+        <attribute name="testId" type="int" use="required"/>
+    </complexType>
+
+</schema>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testData xmlns="www.epam.tester.xml.com">
+    <Test testId="1">
+        <testName>Java</testName>
+        <subject>IT</subject>
+        <question>
+            <description>Что называется классом в Java?</description>
+            <correctAnswer>Класс - это описание структуры обьекта</correctAnswer>
+            <variants>
+                <variant>Класс - модификатор доступа</variant>
+                <variant>Класс - это описание структуры обьекта</variant>
+                <variant>Не знаю ответа</variant>
+            </variants>
+        </question>
+        <question>
+            <description>С какого индекса начинается первый елемент в массиве?</description>
+            <correctAnswer>0</correctAnswer>
+            <variants>
+                <variant>1</variant>
+                <variant>0</variant>
+                <variant>3</variant>
+            </variants>
+        </question>
+    </Test>
+
+    <Test testId="2">
+        <testName>Страны</testName>
+        <subject>География</subject>
+        <question>
+            <description>Назовите столицу Армении</description>
+            <correctAnswer>Ереван</correctAnswer>
+            <variants>
+                <variant>Ереван</variant>
+                <variant>Москва</variant>
+                <variant>Варкута</variant>
+            </variants>
+        </question>
+        <question>
+            <description>Назовите столицу Росии</description>
+            <correctAnswer>Москва</correctAnswer>
+            <variants>
+                <variant>Ереван</variant>
+                <variant>Москва</variant>
+                <variant>Воронеж</variant>
+            </variants>
+        </question>
+    </Test>
+
+</testData>

@@ -1,12 +1,14 @@
 package bean.entity;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ivan on 25.10.2016.
  */
 public class Question {
     private String description;
     private String correctAnswer;
-    private String[] variants = new String[3];
+    private ArrayList<String> variants = new ArrayList<>();
 
     public String getDescription() {
         return description;
@@ -24,11 +26,11 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public String[] getVariants() {
+    public ArrayList<String> getVariants() {
         return variants;
     }
 
-    public void setVariants(String[] variants) {
+    public void setVariants(ArrayList<String> variants) {
         this.variants = variants;
     }
 }

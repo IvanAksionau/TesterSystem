@@ -39,13 +39,12 @@ public class MySQLTestDAO implements TestDAO {
             for (int i = 0; i < questions.size(); i++) {
                 currentQuestion = questions.get(i);
                 //берём question() из списка "questions" и достаём из него список variants
-                String[] variants = questions.get(i).getVariants();
+                ArrayList<String> variants = questions.get(i).getVariants();
                 //добавляем в базу варианты ответа,связывая их с соотв. вопросом по question_id
-                for (int j = 0; j < variants.length; j++) {
-                    String variant = variants[j];
+                for (String listVariant : variants) {
                     statement.executeUpdate("insert into variants values ("
                             + "(select question_id from test_data where correct_answer = '"
-                            + currentQuestion.getCorrectAnswer() + "'), '" + variant + "');");
+                            + currentQuestion.getCorrectAnswer() + "'), '" + listVariant + "');");
                 }
             }
         } catch (InterruptedException | SQLException ex) {

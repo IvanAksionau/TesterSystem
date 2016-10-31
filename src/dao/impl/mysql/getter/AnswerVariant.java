@@ -7,14 +7,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * Created by Ivan on 27.10.2016.
  */
 public class AnswerVariant {
 
-    public static String[] getAnswerVariants(int questionID) throws DAOException {
-        String[] variants = new String[3];
+    public static ArrayList<String> getAnswerVariants(int questionID) throws DAOException {
+        ArrayList<String> variants = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -23,11 +24,9 @@ public class AnswerVariant {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(questionVariantsQuery);
-            int variantsIndex = 0 ;
             while (resultSet.next()) {
                 String variant = resultSet.getString("variant");
-                variants[variantsIndex] = variant;
-                variantsIndex++;
+                variants.add(variant);
             }
 
         } catch (InterruptedException | SQLException ex) {

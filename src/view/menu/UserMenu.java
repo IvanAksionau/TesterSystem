@@ -9,6 +9,7 @@ import bean.entity.Test;
 import controller.Controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import static jdk.nashorn.internal.runtime.JSType.isNumber;
@@ -37,45 +38,46 @@ public class UserMenu {
                     System.out.println(userMenu);
                     break;
                 case "1"://Pass test
-                    PassTestRequest request1 = new PassTestRequest();
-                    request1.setCommandName("PASS_TEST");
-                    System.out.println("Enter test № :");
-                    int testID = getVariantNumber();
-                    request1.setTestId(testID);
-                    PassTestResponse response1 = (PassTestResponse) controller.doRequest(request1);
-                    if (response1.isErrorStatus() == false) {
-                        System.out.println(response1.getResultMessage());
-                        Test test = response1.getTest();
-                        if (test.getTestName() != null) {
-                            passTest(test);
-                        }
-                    } else {
-                        System.out.println(response1.getErrorMessage());
-                    }
+                    passTest();
                     break;
                 case "2"://Show all tests
-                    AdminMenu.showTestList(controller);            }
+                    AdminMenu.showTestList(controller);
+            }
         }
     }
 
-    static void passTest(Test test) {
-        int correctAnswer = 0;
-        ArrayList<Question> questions = test.getQuestions();
-        for (Question question : questions) {
-            //выводим на экран описание вопроса
-            System.out.println(question.getDescription());
-            String[] variants = question.getVariants();
-            for (int i = 0; i < variants.length; i++) {
-                System.out.println("№ " + (i + 1) + " - " + variants[i]);
+    static void passTest() {
+        PassTestRequest request1 = new PassTestRequest();
+        request1.setCommandName("PASS_TEST");
+        System.out.println("Enter test № :");
+        int testID = getVariantNumber();
+        request1.setTestId(testID);
+        PassTestResponse response1 = (PassTestResponse) controller.doRequest(request1);
+        if (response1.isErrorStatus() == false) {
+            System.out.println(response1.getResultMessage());
+            Test test = response1.getTest();
+            if (test.getTestName() != null) {
+                int correctAnswer = 0;
+                ArrayList<Question> questions = test.getQuestions();
+                for (Question question : questions) {
+                    System.out.println(question.getDescription());
+                    ArrayList variants = question.getVariants();
+                    //меняем индекс правильного ответа
+                    Collections.shuffle(variants);
+                    for (int i = 0; i < variants.size(); i++) {
+                        System.out.println("№ " + (i + 1) + " - " + variants.get(i));
+                    }
+                    System.out.println("Enter correct question №");
+                    int numberUserVariant = getVariantNumber();
+                    if (variants.get(numberUserVariant - 1).equals(question.getCorrectAnswer())) {
+                        correctAnswer++;
+                    }
+                }
+                System.out.println("Count of correct answers is " + correctAnswer);
             }
-            System.out.println("Enter correct question №");
-            int numberUserVariant = getVariantNumber();
-            //сравниваем выбранный вариант пользователя с правильным ответом
-            if (variants[numberUserVariant - 1].equals(question.getCorrectAnswer())) {
-                correctAnswer++;
-            }
+        } else {
+            System.out.println(response1.getErrorMessage());
         }
-        System.out.println("Count of correct answers is " + correctAnswer);
     }
 
     public static int getVariantNumber() {
@@ -86,7 +88,7 @@ public class UserMenu {
             number = Integer.parseInt(variantNumber);
         } catch (NumberFormatException e) {
             while (variantNumber.isEmpty() || !isNumber(variantNumber)) {
-                //проверяем регуляркой, являеться ли числом
+                //проверяем регуляркой, являеться ли положительным числом числом
                 if (variantNumber.matches("[+]?\\d+")) {
                     return Integer.parseInt(variantNumber);
                 }

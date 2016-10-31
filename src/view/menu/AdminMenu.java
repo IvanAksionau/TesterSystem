@@ -9,7 +9,6 @@ import bean.entity.Test;
 import controller.Controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -71,8 +70,8 @@ public class AdminMenu {
                 break;
             }
             if (inputData.equals("y")) {
-                ArrayList<String> answerVariants = new ArrayList<>();
                 Question question = new Question();
+                ArrayList<String> answerVariants = new ArrayList<>();
                 System.out.println("Enter your question :");
                 question.setDescription(getNotEmptyData());
                 System.out.println("Enter correct answer :");
@@ -83,12 +82,7 @@ public class AdminMenu {
                 System.out.println("Enter second incorrect answers :");
                 answerVariants.add(getNotEmptyData());
                 answerVariants.add(correctAnswer);
-
-                //перемешиваем варианты ответов в колекции,
-                //чтобы менять расположение correctAnswer
-                Collections.shuffle(answerVariants);
-                //приводим список вариантов к массиву и присваеваем question
-                question.setVariants(answerVariants.toArray(new String[3]));
+                question.setVariants(answerVariants);
                 questionList.add(question);
             }
         }
